@@ -5,7 +5,7 @@ use std::fs::read_to_string;
 use serde::Deserialize;
 use serde::de::Deserializer;
 
-#[derive(Clone, PartialEq, Eq, Hash)]
+#[derive(Clone, PartialEq, Eq, Hash, Debug)]
 pub enum Type {
     UNKNOWN,
     NORMAL,
@@ -35,13 +35,13 @@ struct TypeChartJsonRow {
     effectiveness: f64,
 }
 
-fn string_to_type<'a, D>(deserializer: D) -> Result<Type, D::Error>
+pub fn string_to_type<'a, D>(deserializer: D) -> Result<Type, D::Error>
 where 
     D: Deserializer<'a>
 {
     let string = String::deserialize(deserializer)?;
     
-    match string.as_str() {
+    match string.to_lowercase().as_str() {
         "normal" => Ok(Type::NORMAL),
         "fire" => Ok(Type::FIRE),
         "water" => Ok(Type::WATER),

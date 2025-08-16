@@ -16,5 +16,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     
     println!("Effectiveness: {}", effectiveness);
 
+    if let Some(fire_blast) = data.get_move("Fire Blast") {
+        println!("Fire blast: {:?}", fire_blast)
+    } else {
+        println!("Fire blast not found")
+    }
+
     Ok(())
 }
